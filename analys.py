@@ -93,10 +93,15 @@ class Point:
     numAgregates = 0
     avgLength = 0
     avgS = 0
+    time = 0
 
-    def __init__(self):
-        #parse
-        print("init")
+    def __init__(self,len,es):
+        k = 0
+        while (k < len):
+            Particle.append(Pies(k,es.part[k].pos[0],es.part[k].pos[1],es.part[k].pos[2]))
+        k+=1
+        couple = findCouple()
+        agregates = clasterForm()
     
     def findCouple(self):
         arr = []
@@ -173,4 +178,28 @@ class Point:
                 j+=1
             i+=1
         return self.clasters
+    def Analyse():
+        numAgregates = len(agregates)
+        sumWidth = 0
+        sumLength = 0
+        sumS = 0 
+        i = 0
+        while(i<len(agregates)):
+            sumWidth+=agregates[i].analys()
+            sumLength+=agregates[i].size()
+            sumS+=agregates[i].s_Full()
+        avgWidth = sumWidth/numAgregates
+        avgS = sumS/numAgregates
+        avgLength = Particle.size()/(agregates.size()+(Particle.size()-sumLength))
+    def getTime():
+        return time 
+    def getNumPies():
+        return numAgregates
+    def getAvgWidth:
+        return avgWidth
+    def getAvgLength:
+        return avgLength
+    def getAvgS:
+        return avgS
+    
 
