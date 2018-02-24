@@ -20,22 +20,22 @@ class Claster:
         self.claster.append(pies)
     
     def analys(self):
-        return s(self.claster[self.getInd(true)],self.claster[self.getInd(false)])
+        return self.s(self.claster[self.getInd(True)],self.claster[self.getInd(False)])
     
-    def s(a,b):
+    def s(self,a,b):
         d = self.radius(a,b)
         return math.pi * math.pow((d+self.r),2)
 
-    def radius(a,b):
+    def radius(self,a,b):
         return (math.sqrt(math.pow(math.fabs(a.x-b.x),2)+math.pow(math.fabs(a.y-b.y),2))/2)
 
-    def heigh(a,b):
+    def heigh(self,a,b):
         return math.sqrt(math.pow(math.fabs(a.x-b.x),2)+math.pow(math.fabs(a.z-b.z),2))
 
     def s_Full():
-        return 2*math.pi * radius(self.claster[getInd(true)],self.claster[getInd(true)])*heigh(self.claster[getIndHeigh(true)],self.claster[getIndHeigh(true)])
+        return 2*math.pi * radius(self.claster[getInd(True)],self.claster[getInd(False)])*heigh(self.claster[getIndHeigh(True)],self.claster[getIndHeigh(False)])
 
-    def getIndHeigh(isPiesA):
+    def getIndHeigh(self,isPiesA):
         ind1 = 0
         ind2 = 0
         range = 0.0
@@ -43,10 +43,10 @@ class Claster:
         while (i<len(self.claster)):
             j = i
             while (j < len(self.claster)):
-                if(range < math.sqrt(math.pow(math.fabs(claster[i].x-claster[j].x),2)+math.pow(math.fabs(claster[i].z)-math.fabs(claster[j].z),2))):
+                if(range < math.sqrt(math.pow(math.fabs(self.claster[i].x-self.claster[j].x),2)+math.pow(math.fabs(self.claster[i].z)-math.fabs(self.claster[j].z),2))):
                     ind1 = i
                     ind2 = j
-                    range = math.sqrt(math.pow(math.fabs(claster[i].x-claster[j].x),2)+math.pow(math.fabs(claster[i].z)-math.fabs(claster[j].z),2))
+                    range = math.sqrt(math.pow(math.fabs(self.claster[i].x-self.claster[j].x),2)+math.pow(math.fabs(self.claster[i].z)-math.fabs(self.claster[j].z),2))
                 j+=1
             i+=1
         if (isPiesA):
@@ -54,18 +54,18 @@ class Claster:
         else:
             return ind2
 
-    def getIndHeigh(isPiesA):
+    def getInd(self,isPiesA):
         ind1 = 0
         ind2 = 0
         range = 0.0
         i = 0
-        while (i<len(claster)):
+        while (i<len(self.claster)):
             j = i
-            while (j < len(claster)):
-                if(range < math.sqrt(math.pow(math.fabs(claster[i].x-claster[j].x),2)+math.pow(math.fabs(claster[i].y)-math.fabs(claster[j].y),2))):
+            while (j < len(self.claster)):
+                if(range < math.sqrt(math.pow(math.fabs(self.claster[i].x-self.claster[j].x),2)+math.pow(math.fabs(self.claster[i].y)-math.fabs(self.claster[j].y),2))):
                     ind1 = i
                     ind2 = j
-                    range = math.sqrt(math.pow(math.fabs(claster[i].x-claster[j].x),2)+math.pow(math.fabs(claster[i].y)-math.fabs(claster[j].y),2))
+                    range = math.sqrt(math.pow(math.fabs(self.claster[i].x-self.claster[j].x),2)+math.pow(math.fabs(self.claster[i].y)-math.fabs(self.claster[j].y),2))
                 j+=1
             i+=1
         if (isPiesA):
@@ -75,18 +75,15 @@ class Claster:
 
         
     def size():
-        return len(claster)
+        return len(self.claster)
 
 class couple_Pies :
-    m = 0 #pies
-    n = 0 # pies
     def __init__(self,m_,n_,mx,my,mz,nx,ny,nz):
-        m = Pies(m_,mx,my,mz)
-        n = Pies(n_,nx,ny,nz)
+        self.m = Pies(m_,mx,my,mz)
+        self.n = Pies(n_,nx,ny,nz)
 class Point:
-    range = 3
+    range = 3.0
     link = ""
-    time = 0
     avgWidth = 0
     numAgregates = 0
     avgLength = 0
@@ -94,31 +91,31 @@ class Point:
     time = 0
 
     def __init__(self,len,es):
-        k = 0
         self.couple = []
         self.Particle = []
         self.agregates = []
+        k = 0
         while (k < len):
             self.Particle.append(Pies(k,es.part[k].pos[0],es.part[k].pos[1],es.part[k].pos[2]))
             k+=1
         self.couple = self.findCouple()
         self.agregates = self.clasterForm()
-        print(self.agregates)
+        print(self.agregates[0].analys())
     
     def findCouple(self):
         self.arr = []
         i = 0
-        while(i<len(self.arr)-1):
+        while(i<len(self.Particle)-1):
             j = i+1
-            while(j<len(self.arr)):
-                if(math.sqrt(math.pow(self.Particle[i].x-self.Particle[j].x,2)+math.pow(self.Particle[i].y-self.Particle[j].y,2)+math.pow(self.Particle[i].z-self.Particle[j].z,2))<=range):
+            while(j<len(self.Particle)):
+                if(math.sqrt(math.pow(self.Particle[i].x-self.Particle[j].x,2)+math.pow(self.Particle[i].y-self.Particle[j].y,2)+math.pow(self.Particle[i].z-self.Particle[j].z,2))<=self.range):
                     self.arr.append(couple_Pies(i,j,self.Particle[i].x,self.Particle[i].y,self.Particle[i].z,self.Particle[j].x,self.Particle[j].y,self.Particle[j].z))
                 j+=1
             i+=1
         return self.arr
 
     def clasterForm (self):
-        self.clasters = []
+        self.claster = []
         self.Piese_ = []
         self.Piese = []
         while (len(self.couple)!=0):
@@ -139,6 +136,7 @@ class Point:
                         while(len(intList)>k):
                             if(self.couple[j].m.index==intList[k].index):
                                 isSorted = False
+                                isRepeat = False
                                 l = 0
                                 while(l<len(intList)):
                                     if(self.couple[j].n.index==intList[l].index):
@@ -152,6 +150,7 @@ class Point:
                                 break
                             if(self.couple[j].n.index==intList[k].index):
                                 isSorted = False
+                                isRepeat = False
                                 l = 0
                                 while(l<len(intList)):
                                     if(self.couple[j].m.index==intList[l].index):
@@ -166,18 +165,19 @@ class Point:
                             k+=1
                         j+=1
                     
-                Piese.append(intList)
+                self.Piese.append(intList)
+                print(intList)
                 i+=1
-
         i=0
         while(i<len(self.Piese)):
             self.claster.append(Claster())
             j=0
             while(j<len(self.Piese[i])):
-                self.claster[i].add(self.Piese[j])
+                self.claster[i].add(self.Piese[i][j])
                 j+=1
             i+=1
-        return self.clasters
+        return self.claster
+
     def Analyse():
         numAgregates = len(self.agregates)
         sumWidth = 0
@@ -192,14 +192,19 @@ class Point:
         self.avgS = sumS/self.numAgregates
         self.avgLength = self.Particle.size()/(self.agregates.size()+(self.Particle.size()-sumLength))
         print(avgWidth)
+
     def getTime():
         return time 
+
     def getNumPies():
         return numAgregates
+
     def getAvgWidth():
         return avgWidth
+
     def getAvgLength():
         return avgLength
+
     def getAvgS():
         return avgS
 

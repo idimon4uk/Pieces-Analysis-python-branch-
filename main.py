@@ -20,6 +20,11 @@ class testParam:
 test = testParam()
 test.add(0,0,0)
 test.add(1,1,1)
+test.add(2,2,2)
+
+test.add(11,11,11)
+test.add(12,12,12)
+test.add(13,13,13)
 print(test.part[0].pos)
 
-pointTest = analys.Point(2,test)
+pointTest = analys.Point(6,test)
