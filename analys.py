@@ -1,4 +1,18 @@
 import math
+class Analys:
+    circle_area = 0
+    cone_area = 0
+    diameter = 0
+    size = 0
+    heigh = 0
+    num_agregates = 0
+    def __init__(self,circle_area_,cone_area_,diameter_,size_,heigh_,num_agregates_):
+        self.circle_area = circle_area_
+        self.cone_area = cone_area_
+        self.diameter = diameter_
+        self.size = size_
+        self.heigh = heigh_
+
 class Pies:
     x = 0
     y = 0
@@ -19,8 +33,13 @@ class Claster:
     def add (self,pies):
         self.claster.append(pies)
     
-    def analys(self):
-        return self.s(self.claster[self.getInd(True)],self.claster[self.getInd(False)])
+    def getAnalys(self):
+        circle_area = self.s(self.claster[self.getInd(True)],self.claster[self.getInd(False)])
+        size = len(self.claster)
+        cone_area = self.s_Full()
+        heigh = self.heigh(self.claster[self.getIndHeigh(True)],self.claster[self.getIndHeigh(False)])
+        diametr = 2*self.radius(self.claster[self.getInd(True)],self.claster[self.getInd(False)])
+        return Analys(circle_area,cone_area,diametr,size,heigh,1)
     
     def s(self,a,b):
         d = self.radius(a,b)
@@ -32,8 +51,8 @@ class Claster:
     def heigh(self,a,b):
         return math.sqrt(math.pow(math.fabs(a.x-b.x),2)+math.pow(math.fabs(a.z-b.z),2))
 
-    def s_Full():
-        return 2*math.pi * radius(self.claster[getInd(True)],self.claster[getInd(False)])*heigh(self.claster[getIndHeigh(True)],self.claster[getIndHeigh(False)])
+    def s_Full(self):
+        return 2*math.pi * self.radius(self.claster[self.getInd(True)],self.claster[self.getInd(False)])*self.heigh(self.claster[self.getIndHeigh(True)],self.claster[self.getIndHeigh(False)])
 
     def getIndHeigh(self,isPiesA):
         ind1 = 0
@@ -73,9 +92,7 @@ class Claster:
         else:
             return ind2
 
-        
-    def size():
-        return len(self.claster)
+
 
 class couple_Pies :
     def __init__(self,m_,n_,mx,my,mz,nx,ny,nz):
@@ -83,11 +100,6 @@ class couple_Pies :
         self.n = Pies(n_,nx,ny,nz)
 class Point:
     range = 3.0
-    link = ""
-    avgWidth = 0
-    numAgregates = 0
-    avgLength = 0
-    avgS = 0
     time = 0
 
     def __init__(self,len,es):
@@ -100,7 +112,6 @@ class Point:
             k+=1
         self.couple = self.findCouple()
         self.agregates = self.clasterForm()
-        print(self.agregates[0].analys())
     
     def findCouple(self):
         self.arr = []
@@ -178,33 +189,22 @@ class Point:
             i+=1
         return self.claster
 
-    def Analyse():
-        numAgregates = len(self.agregates)
-        sumWidth = 0
-        sumLength = 0
-        sumS = 0 
+    def Analyse(self):
+        num_agregates = len(self.agregates)*1.0
+        sum_size = 0.0
+        sum_cone_area = 0
+        sum_circle_area = 0
+        sum_heigh = 0
+        sum_diametr = 0
         i = 0
-        while(i<len(self.agregates)):
-            self.sumWidth+=self.agregates[i].analys()
-            self.sumLength+=self.agregates[i].size()
-            self.sumS+=self.agregates[i].s_Full()
-        self.avgWidth = sumWidth/self.numAgregates
-        self.avgS = sumS/self.numAgregates
-        self.avgLength = self.Particle.size()/(self.agregates.size()+(self.Particle.size()-sumLength))
-        print(avgWidth)
+        while(i<num_agregates):
+            obj = self.agregates[i].getAnalys()
+            sum_size+=obj.size
+            sum_circle_area+=obj.circle_area
+            sum_cone_area+=obj.cone_area
+            sum_diametr+=obj.diameter
+            sum_heigh+=obj.heigh
+            i+=1
+        return Analys(sum_circle_area/num_agregates,sum_cone_area/num_agregates,sum_diametr/num_agregates,sum_size/num_agregates,sum_heigh/num_agregates,num_agregates)
 
-    def getTime():
-        return time 
-
-    def getNumPies():
-        return numAgregates
-
-    def getAvgWidth():
-        return avgWidth
-
-    def getAvgLength():
-        return avgLength
-
-    def getAvgS():
-        return avgS
 
