@@ -1,4 +1,5 @@
 import analys
+import graphData
 class part:
     def __init__(self):
         self.pos = []
@@ -30,3 +31,9 @@ print(test.part[0].pos)
 
 pointTest = analys.Point(7,test)
 print(pointTest.Analyse().size)
+
+x = [1,2,3,4,5]
+y = [2,4,6,8,10]
+graph = graphData.Graph()
+graph.export(x,y)
+print(graph.LagrangeAprox(1.4,graph.dataGraph,4))
